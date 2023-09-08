@@ -20,21 +20,35 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BlocConsumer<CounterBloc, CounterState>(
+            BlocSelector<CounterBloc, CounterState, int>(
+              selector: (state){
+                return state.count*2;
+              }, 
               builder:(context, state){
                 return Text(
-                  '${state.count}',
+                  '$state',
                   style: textStyle,
                 );
               },
-              listener:(context, state){
-                if(state.count>=10){
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text("Maximim value reached"))
-                  );
-                }
-              },
+              
             ),
+
+            // BlocConsumer<CounterBloc, CounterState>(
+            //   builder:(context, state){
+            //     return Text(
+            //       '${state.count}',
+            //       style: textStyle,
+            //     );
+            //   },
+            //   listener:(context, state){
+            //     if(state.count>=10){
+            //       ScaffoldMessenger.of(context).showSnackBar(
+            //         const SnackBar(content: Text("Maximim value reached"))
+            //       );
+            //     }
+            //   },
+            // ),
+
             // BlocListener<CounterBloc, CounterState>(
             //   listenWhen:(previous, current){
             //     return current.count>=10;
@@ -48,6 +62,7 @@ class HomeScreen extends StatelessWidget {
             //   },
             //   child: const Text("Counter App"),
             // ),
+
             // BlocBuilder<CounterBloc, CounterState>(
             //   buildWhen:(previous, current){
             //     log("previous : ${previous.count}, current : ${current.count}");
