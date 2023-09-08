@@ -1,16 +1,16 @@
 abstract class CounterState{
-  int count = 0;
+  int count;
   CounterState({required this.count});
 }
 
 class CounterInitialState extends CounterState{
-  CounterInitialState() : super(count: 0);
+  CounterInitialState(int initCount) : super(count: initCount);
 }
 
 class CounterIncrementState extends CounterState{
-  CounterIncrementState(int value) : super(count: value);
+  CounterIncrementState(int incrCount) : super(count: incrCount);
 }
 
 class CounterDecrementState extends CounterState{
-  CounterDecrementState(int value) : super(count: value);
+  CounterDecrementState(int decrCount) : super(count: decrCount);
 }
