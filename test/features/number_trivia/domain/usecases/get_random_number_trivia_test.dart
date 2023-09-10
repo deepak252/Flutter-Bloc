@@ -1,7 +1,7 @@
 
 import 'package:bloc_app/features/number_trivia/domain/entities/number_trivia.dart';
 import 'package:bloc_app/features/number_trivia/domain/repositories/number_trivia_repository.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
+import 'package:bloc_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
@@ -11,10 +11,10 @@ class MockNumberTriviaRepository extends Mock implements NumberTriviaRepository{
 
 void main(){
   MockNumberTriviaRepository? mockNumberTriviaRepository;
-  GetConcreteNumberTrivia? usecase;
+  GetRandomNumberTrivia? usecase;
   setUp((){
     mockNumberTriviaRepository = MockNumberTriviaRepository();
-    usecase = GetConcreteNumberTrivia(mockNumberTriviaRepository!);
+    usecase = GetRandomNumberTrivia(mockNumberTriviaRepository!);
   });
 
   const tNumber = 1;
@@ -27,10 +27,10 @@ void main(){
       when(mockNumberTriviaRepository!.getConcreteNumberTrivia(1))
       .thenAnswer((_)async => const Right(tNumberTrivia));
       //act
-      final result = await usecase!(const ConcreteNumberTriviaParams(number: 20));
+      final result = await usecase!(RandomNumberTriviaParams());
       //assert
       expect(result, const Right(tNumberTrivia));
-      verify(mockNumberTriviaRepository!.getConcreteNumberTrivia(tNumber));
+      verify(mockNumberTriviaRepository!.getRandomNumberTrivia());
       verifyNoMoreInteractions(mockNumberTriviaRepository);
     }
   );
