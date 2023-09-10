@@ -11,15 +11,22 @@ class HomeScreen extends StatelessWidget {
   final textStyle = const TextStyle(
     fontSize: 30
   );
+
   @override
   Widget build(BuildContext context) {
     log("Home Screen Rebuild");
+    // int count = context.read<CounterCubit>().state.count;  // Once
+    // int count = BlocProvider.of<CounterCubit>(context).state.count;  // Once
+    // int count = context.watch<CounterCubit>().state.count;  // On State Change
+    // log("count = $count");
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             BlocConsumer<CounterCubit, CounterState>(
+              // bloc: BlocProvider.of<CounterCubit>(context),
+              // bloc: context.read<CounterCubit>(),
               builder:(context, state){
                 return Text(
                   '${state.count}',
@@ -33,6 +40,18 @@ class HomeScreen extends StatelessWidget {
                   );
                 }
               },
+            ),
+
+            Text(
+              // Will rebuild the entire widget, avoid
+              // '${context.watch<CounterCubit>().state.count}', 
+
+              // Will rebuilt the entire widget, avoid
+              // '${context.select((CounterCubit counter) => counter.state.count)}', 
+
+              // Will rebuilt the entire widget if return  value changes from true to false
+              '${context.select((CounterCubit counter) => counter.state.count<3)}', 
+              style: textStyle,
             ),
 
             // BlocConsumer<CounterBloc, CounterState>(
@@ -81,7 +100,8 @@ class HomeScreen extends StatelessWidget {
               children: [
                 FloatingActionButton(
                   onPressed: (){
-                    context.read<CounterCubit>().decrement();
+                    context.read<CounterCubit>().decrement(); // recommended
+                    // BlocProvider.of<CounterCubit>(context).decrement();
                   }, 
                   child: Text(
                     '-',
@@ -96,9 +116,21 @@ class HomeScreen extends StatelessWidget {
                     '+',
                     style: textStyle,
                   )
-                )
+                ),
+                
               ],
-            )
+              
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                // int count = context.watch<CounterCubit>().state.count; //ERROR
+                int count = context.read<CounterCubit>().state.count;
+                log("count = $count");
+              },
+              child: const Text("Read Count")),
           ],
         )
       )
