@@ -1,5 +1,5 @@
 import 'package:bloc_app/core/error/exception.dart';
-import 'package:bloc_app/core/utils/network_info.dart';
+import 'package:bloc_app/core/util/network_info.dart';
 import 'package:bloc_app/features/number_trivia/data/datasources/number_trivia_local_data_source.dart';
 import 'package:bloc_app/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
 import 'package:bloc_app/features/number_trivia/data/models/number_trivia_model.dart';
@@ -9,7 +9,7 @@ import 'package:bloc_app/features/number_trivia/domain/repositories/number_trivi
 import 'package:dartz/dartz.dart';
 
 // typedef  _ConcreteOrRandom =  Future<NumberTrivia> Function();
-typedef  Future<NumberTrivia> _ConcreteOrRandomFuture();
+typedef  _ConcreteOrRandomFuture = Future<NumberTrivia> Function();
 
 class NumberTriviaRepositoryImpl implements NumberTriviaRepository{
   final NumberTriviaRemoteDataSource remoteDataSource;
