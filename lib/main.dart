@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-
+import 'di.dart' as di;
 void main()async{
   WidgetsFlutterBinding.ensureInitialized();
+  di.init();
   await Hive.initFlutter();
   await Hive.openLazyBox('numberTrivia');
   runApp(const MyApp());
