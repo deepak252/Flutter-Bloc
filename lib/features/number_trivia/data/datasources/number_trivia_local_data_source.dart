@@ -8,11 +8,11 @@ abstract class NumberTriviaLocalDataSource{
 }
 
 class NumberTriviaLocalDataSourceImpl implements NumberTriviaLocalDataSource{
-  final numberTriviaBox = Hive.box('numberTriviaBox');
+  final numberTriviaBox = Hive.box('numberTrivia');
 
   @override
   Future<NumberTriviaModel> getLastNumberTrivia()async{
-    final numberTriviaJson = numberTriviaBox.get(0);
+    final numberTriviaJson = numberTriviaBox.get('trivia');
     if(numberTriviaJson!=null){
       return Future.value(NumberTriviaModel.fromJson(numberTriviaJson));
     }else{
@@ -22,7 +22,7 @@ class NumberTriviaLocalDataSourceImpl implements NumberTriviaLocalDataSource{
 
   @override
   Future<void> cacheNumberTrivia(NumberTriviaModel triviaToCache)async{
-    await numberTriviaBox.add(triviaToCache.toJson());
+    await numberTriviaBox.put('trivia',triviaToCache.toJson());
   }
 
 }

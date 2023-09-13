@@ -6,7 +6,7 @@ import 'package:get_it/get_it.dart';
 void coreDI(GetIt sl){
   
   sl.registerLazySingleton(() => InputConverter());
-  sl.registerLazySingleton(() => NetworkInfoImpl(sl()));
+  sl.registerLazySingleton<NetworkInfo>(() => NetworkInfoImpl(sl()));
 
 
 
