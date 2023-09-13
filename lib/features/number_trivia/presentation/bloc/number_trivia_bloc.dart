@@ -1,14 +1,19 @@
+library number_trivia_bloc;
 
 
 import 'dart:developer';
 
 import 'package:bloc_app/core/error/failure.dart';
 import 'package:bloc_app/core/util/input_converter.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
-import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_event.dart';
-import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_state.dart';
+import 'package:bloc_app/features/number_trivia/domain/entities/number_trivia.dart';
+import 'package:bloc_app/features/number_trivia/domain/usecases/use_cases.dart';
+import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+part 'number_trivia_state.dart';
+part 'number_trivia_event.dart';
+
 
 const String serverFailureMessage = 'Server Failure';
 const String cacheFailureMessage = 'Cache Failure';

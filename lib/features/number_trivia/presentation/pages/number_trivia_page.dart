@@ -1,8 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
-import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_event.dart';
-import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_state.dart';
 import 'package:bloc_app/features/number_trivia/presentation/widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

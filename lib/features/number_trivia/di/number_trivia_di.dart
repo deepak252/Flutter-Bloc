@@ -2,8 +2,7 @@ import 'package:bloc_app/features/number_trivia/data/datasources/number_trivia_l
 import 'package:bloc_app/features/number_trivia/data/datasources/number_trivia_remote_data_source.dart';
 import 'package:bloc_app/features/number_trivia/data/repositories/number_trivia_repository_impl.dart';
 import 'package:bloc_app/features/number_trivia/domain/repositories/number_trivia_repository.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
+import 'package:bloc_app/features/number_trivia/domain/usecases/use_cases.dart';
 import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
 import 'package:get_it/get_it.dart';
 

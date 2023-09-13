@@ -2,11 +2,8 @@
 
 import 'package:bloc_app/core/util/input_converter.dart';
 import 'package:bloc_app/features/number_trivia/domain/entities/number_trivia.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_concrete_number_trivia.dart';
-import 'package:bloc_app/features/number_trivia/domain/usecases/get_random_number_trivia.dart';
+import 'package:bloc_app/features/number_trivia/domain/usecases/use_cases.dart';
 import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_bloc.dart';
-import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_event.dart';
-import 'package:bloc_app/features/number_trivia/presentation/bloc/number_trivia_state.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
