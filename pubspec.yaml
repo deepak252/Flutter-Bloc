@@ -26,8 +26,23 @@ dependencies:
   flutter:
     sdk: flutter
 
-
   cupertino_icons: ^1.0.2
+
+  # Service Locator
+  get_it: ^7.6.0
+  # State Management
+  flutter_bloc: ^8.1.3
+  # Dart Objects Equality
+  equatable: ^2.0.5
+
+  http: ^0.13.5
+  # Local Cache
+  hive_flutter: ^1.1.0
+  # Cache Network Images
+  cached_network_image: ^3.2.3
+
+  # Date Time format
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:
