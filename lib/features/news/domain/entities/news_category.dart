@@ -5,7 +5,7 @@ class NewsCategory extends Equatable{
   final String id;
   final String name;
 
-  const NewsCategory(this.id, this.name);
+  const NewsCategory({required this.id, required this.name});
 
   // props : list of fields, for object comparision
   @override
