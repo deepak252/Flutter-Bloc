@@ -1,13 +1,10 @@
 
 import 'dart:convert';
 
+import 'package:bloc_app/core/constants/api_path.dart';
 import 'package:bloc_app/core/resources/exceptions.dart';
 import 'package:bloc_app/features/news/data/models/models.dart';
 import 'package:http/http.dart' as http;
-
-const baseUrl = 'https://openapi.programming-hero.com/api';
-const articlesUrl = '$baseUrl/news/category/01';
-const categoriesUrl = '$baseUrl/news/categories';
 
 abstract class NewsRemoteDataSource{
   Future<List<ArticleModel>> getArticles(String categoryId);
@@ -21,12 +18,10 @@ class NewsRemoteDataSourceImpl extends NewsRemoteDataSource{
   
   @override
   Future<List<ArticleModel>> getArticles(String categoryId)async{
-    final response = await http.get(Uri.parse(articlesUrl));
+    final response = await http.get(Uri.parse('${ApiPath.articlesUrl}/$categoryId'));
     if(response.statusCode==200){
-      List articlesData = json.decode(response.body)?['data'];
-      return articlesData.map((articleJson) => 
-        ArticleModel.fromJson(articleJson)
-      ).toList();
+      final articlesJson = json.decode(response.body)?['data'];
+      return articlesFromJson(articlesJson);
     }else{
       throw ServerException(message: "Server Error");
     }
@@ -34,12 +29,10 @@ class NewsRemoteDataSourceImpl extends NewsRemoteDataSource{
 
   @override
   Future<List<NewsCategoryModel>> getCategories()async{
-    final response = await http.get(Uri.parse(categoriesUrl));
+    final response = await http.get(Uri.parse(ApiPath.categoriesUrl));
     if(response.statusCode==200){
-      List categoriesData = json.decode(response.body)?['data']?['news_category'];
-      return categoriesData.map((categoryJson) => 
-        NewsCategoryModel.fromJson(categoryJson)
-      ).toList();
+      final categoriesJson = json.decode(response.body)?['data']?['news_category'];
+      return categoriesFromJson(categoriesJson);
     }else{
       throw ServerException(message: "Server Error");
     }

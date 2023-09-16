@@ -1,6 +1,6 @@
-
 import 'package:bloc_app/core/resources/exceptions.dart';
 import 'package:bloc_app/core/resources/failure.dart';
+import 'package:bloc_app/features/news/data/datasources/news_local_data_source.dart';
 import 'package:bloc_app/features/news/data/datasources/news_remote_data_source.dart';
 import 'package:bloc_app/features/news/domain/entities/news_category.dart';
 import 'package:bloc_app/features/news/domain/entities/article.dart';
@@ -9,40 +9,49 @@ import 'package:bloc_app/features/news/domain/repository/news_repository.dart';
 
 class NewsRepositoryImpl implements NewsRepository{
   final NewsRemoteDataSource _remoteDataSource;
+  final NewsLocalDataSource _localDataSource;
 
   NewsRepositoryImpl({
-    required NewsRemoteDataSource remoteDataSource
-  }): _remoteDataSource = remoteDataSource;
+    required NewsRemoteDataSource remoteDataSource,
+    required NewsLocalDataSource localDataSource
+  }): _remoteDataSource = remoteDataSource,
+    _localDataSource = localDataSource;
   
   @override
   Future<Result<List<Article>>> getArticles(String categoryId)async{
     try{
       final articles = await _remoteDataSource.getArticles(categoryId);
-      return ResultSuccess(articles);
-    }on ServerException catch(e){
+      await _localDataSource.cacheArticles(articles);
+      return ResultSuccess(data: articles);
+    } on CacheException catch(e){
       return ResultFailure(
-        ServerFailure(message: '${e.message}')
+        failure: CacheFailure(message: e.message)
       );
-    }catch(e){
-      return const ResultFailure(
-        ServerFailure(message: 'Something went wrong')
+    } catch(e){
+      final cachedArticles = await _localDataSource.getArticlesFromCache();
+      final failure = ServerFailure(
+        message: e is ServerException ?  '${e.message}' : 'Something went wrong!'
       );
+      return ResultFailure(failure: failure, data: cachedArticles);
     }
   }
 
   @override
   Future<Result<List<NewsCategory>>> getCategories()async{
     try{
-      final articles = await _remoteDataSource.getCategories();
-      return ResultSuccess(articles);
-    }on ServerException catch(e){
+      final categories = await _remoteDataSource.getCategories();
+      await _localDataSource.cacheCategories(categories);
+      return ResultSuccess(data: categories);
+    } on CacheException catch(e){
       return ResultFailure(
-        ServerFailure(message: '${e.message}')
+        failure: CacheFailure(message: e.message)
       );
-    }catch(e){
-      return const ResultFailure(
-        ServerFailure(message: 'Something went wrong')
+    } catch(e){
+      final cachedCategories = await _localDataSource.getCategoriesFromCache();
+      final failure = ServerFailure(
+        message: e is ServerException ?  '${e.message}' : 'Something went wrong!'
       );
+      return ResultFailure(failure: failure, data: cachedCategories);
     }
   }
   

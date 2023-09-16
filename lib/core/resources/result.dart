@@ -8,9 +8,9 @@ abstract class Result<T>{
 }
 
 class ResultSuccess<T> extends Result<T>{
-  const ResultSuccess(T data) : super(data: data);
+  const ResultSuccess({required T data}) : super(data: data);
 }
 
 class ResultFailure<T> extends Result<T>{
-  const ResultFailure(Failure failure) : super(failure: failure);
+  const ResultFailure({required Failure? failure, T? data}) : super(failure: failure, data: data);
 }
