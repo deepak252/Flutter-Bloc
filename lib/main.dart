@@ -26,6 +26,19 @@ class MyApp extends StatelessWidget {
         home: const HomePage(),
       )
     );
+
+    // return MaterialApp(
+    //     title: 'Flutter Demo',
+    //     theme: ThemeData(
+    //       primarySwatch: Colors.blue,
+    //     ),
+    //     home: BlocProvider<CounterCubit>(
+    //       create: (_)=>CounterCubit(),
+    //       child: const HomePage()
+    //     )
+    //   );
+
+    
     // return MaterialApp(
     //   title: 'Flutter Demo',
     //   theme: ThemeData(

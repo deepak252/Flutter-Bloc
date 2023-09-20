@@ -49,6 +49,58 @@ class CounterPage extends StatelessWidget {
                 context.read<CounterCubit>().decrement();
               }, 
               child: const Text("-")
+            ),
+            const SizedBox(height: 22,),
+            ElevatedButton(
+              onPressed: (){
+                showDialog(
+                  context: context, 
+                  builder:(context)=> counterDialog(context)
+                );
+              }, 
+              child: const Text("Show Counter Dialog")
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget counterDialog(BuildContext context){
+    return AlertDialog(
+      content: Container(
+        height: 300,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            BlocBuilder<CounterCubit, int>(
+              builder:(context, state){
+                return Text(
+                  '$state',
+                  style: const TextStyle(fontSize: 24),
+                );
+              },
+            ),
+            const SizedBox(height: 18,),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                FloatingActionButton(
+                  onPressed: (){
+                    context.read<CounterCubit>().increment();
+                  },
+                  heroTag: 1, 
+                  child:const Text("+"),
+                ),
+                const SizedBox(width: 22,),
+                FloatingActionButton(
+                  heroTag: 2,
+                  onPressed: (){
+                    context.read<CounterCubit>().decrement();
+                  }, 
+                  child: const Text("-")
+                ),
+              ],
             )
           ],
         ),
