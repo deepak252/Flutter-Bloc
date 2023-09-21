@@ -1,3 +1,4 @@
+import 'package:bloc_app/app_router.dart';
 import 'package:bloc_app/features/cart/cubit/cart_cubit.dart';
 import 'package:bloc_app/features/counter/cubit/counter_cubit.dart';
 import 'package:bloc_app/features/home_page.dart';
@@ -5,11 +6,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +26,9 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const HomePage(),
+        // home: const HomePage(),
+        onGenerateRoute: _appRouter.onGenerateRoute,
+        initialRoute: '/',
       )
     );
     // return MaterialApp(

@@ -4,13 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class CartDetailsPage extends StatelessWidget {
-  const CartDetailsPage({super.key});
+  final String title;
+  const CartDetailsPage({required this.title, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart Details"),
+        title: Text(title),
       ),
       body: Center(
         child: Column(

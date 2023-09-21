@@ -43,9 +43,15 @@ class CartPage extends StatelessWidget {
             const SizedBox(height: 22,),
             ElevatedButton(
               onPressed: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_)=>const CartDetailsPage())
+                Navigator.of(context).pushNamed(
+                  '/cartDetails',
+                  arguments: {
+                    'title': 'Custom Cart Details'
+                  }
                 );
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(builder: (_)=>const CartDetailsPage())
+                // );
               }, 
               child: const Text("Show Cart Details"),
               

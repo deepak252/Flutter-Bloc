@@ -38,9 +38,11 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 22,),
             ElevatedButton(
               onPressed: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_)=>const CounterPage())
-                );
+                Navigator.of(context).pushNamed('/counter');
+
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(builder: (_)=>const CounterPage())
+                // );
 
                 // Navigator.of(context).pushReplacement(
                 //   MaterialPageRoute(builder: (_)=>const CounterPage())
@@ -65,9 +67,10 @@ class HomePage extends StatelessWidget {
             const SizedBox(height: 12,),
             ElevatedButton(
               onPressed: (){
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_)=>const CartPage())
-                );
+                Navigator.of(context).pushNamed('/cart');
+                // Navigator.of(context).push(
+                //   MaterialPageRoute(builder: (_)=>const CartPage())
+                // );
               }, 
               child: const Text("Cart Page")
             ),
