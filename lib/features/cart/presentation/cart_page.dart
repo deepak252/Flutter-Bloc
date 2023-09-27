@@ -18,23 +18,35 @@ class CartPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            BlocBuilder<CartCubit, CartState>(
-              builder:(context, state){
+            Builder(
+              builder:(context){
+                final cartState = context.watch<CartCubit>().state;
+                // final counterState = context.watch<CounterCubit>().state;
+                final counterState = context.select<CounterCubit, int>((CounterCubit value) => value.state);
+
                 return Text(
-                  'Cart : ${state.isAdded}',
+                  'Cart : ${cartState.isAdded} \n Counter : $counterState',
                   style: const TextStyle(fontSize: 24),
                 );
               },
             ),
-            const SizedBox(height: 8,),
-            BlocBuilder<CounterCubit, int>(
-              builder:(context, state){
-                return Text(
-                  'Counter : $state',
-                  style: const TextStyle(fontSize: 20),
-                );
-              },
-            ),
+            // BlocBuilder<CartCubit, CartState>(
+            //   builder:(context, state){
+            //     return Text(
+            //       'Cart : ${state.isAdded}',
+            //       style: const TextStyle(fontSize: 24),
+            //     );
+            //   },
+            // ),
+            // const SizedBox(height: 8,),
+            // BlocBuilder<CounterCubit, int>(
+            //   builder:(context, state){
+            //     return Text(
+            //       'Counter : $state',
+            //       style: const TextStyle(fontSize: 20),
+            //     );
+            //   },
+            // ),
             const SizedBox(height: 22,),
             ElevatedButton(
               onPressed: (){
