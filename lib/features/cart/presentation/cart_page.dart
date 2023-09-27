@@ -1,6 +1,6 @@
 import 'package:bloc_app/features/cart/cubit/cart_cubit.dart';
 import 'package:bloc_app/features/cart/cubit/cart_state.dart';
-import 'package:bloc_app/features/cart/presentation/cart_details_page.dart';
+import 'package:bloc_app/features/counter/cubit/counter_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -23,6 +23,15 @@ class CartPage extends StatelessWidget {
                 return Text(
                   'Cart : ${state.isAdded}',
                   style: const TextStyle(fontSize: 24),
+                );
+              },
+            ),
+            const SizedBox(height: 8,),
+            BlocBuilder<CounterCubit, int>(
+              builder:(context, state){
+                return Text(
+                  'Counter : $state',
+                  style: const TextStyle(fontSize: 20),
                 );
               },
             ),
